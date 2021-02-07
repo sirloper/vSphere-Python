@@ -6,7 +6,7 @@ from pysphere.vi_virtual_machine import VIVirtualMachine
 
 def print_verbose(message):
     if verbose:
-        print message
+        print( message )
 
 def find_vm(name):
     try:
