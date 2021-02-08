@@ -38,7 +38,8 @@ def run_post_script(name,ip):
     print_verbose('Running post script: %s %s %s' % (post_script,name,ip))
     retcode = subprocess.call([post_script,name,ip])
     if retcode < 0:
-        print 'ERROR: %s %s %s : Returned a non-zero result' % (post_script,name,ip)
+        #print 'ERROR: %s %s %s : Returned a non-zero result' % (post_script,name,ip)
+        print( "Error: " + post_script + " " + name + " " + ip + " returned a non-zero result." )
         sys.exit(1)
 
 def find_ip(vm,ipv6=False):
@@ -86,7 +87,7 @@ folder      = None
 if args.folder:
     folder      = args.folder[0]
 post_script     = None
-if args.post_script: 
+if args.post_script:
     post_script = args.post_script[0]
 resource_pool   = None
 if args.resource_pool:
@@ -148,10 +149,10 @@ for a in range(1,amount+1):
     else:
         clone = template_vm.clone(vm_name, True, folder_mor, resource_pool_mor, None, None, False)
         print_verbose('VM %s created' % vm_name)
-        
+
         print_verbose('Booting VM %s' % vm_name)
         clone.power_on()
-        
+
         if post_script:
             vms_to_ps.append(vm_name)
     count += 1
@@ -164,7 +165,7 @@ if post_script:
                 ip = find_ip(vm,ipv6)
                 if ip:
                     run_post_script(name,ip)
-                else: 
+                else:
                     print 'ERROR: No IP found for VM %s, post processing disabled' % name
             else:
                 print 'ERROR: VM %s not found, post processing disabled' % name
