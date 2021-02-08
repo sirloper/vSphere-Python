@@ -38,7 +38,6 @@ def run_post_script(name,ip):
     print_verbose('Running post script: %s %s %s' % (post_script,name,ip))
     retcode = subprocess.call([post_script,name,ip])
     if retcode < 0:
-        #print 'ERROR: %s %s %s : Returned a non-zero result' % (post_script,name,ip)
         print( "Error: " + post_script + " " + name + " " + ip + " returned a non-zero result." )
         sys.exit(1)
 
